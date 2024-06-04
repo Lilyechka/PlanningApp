@@ -29,5 +29,9 @@ public class UserController {
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
+    @PutMapping
+    public User updateUser(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
 }
 
