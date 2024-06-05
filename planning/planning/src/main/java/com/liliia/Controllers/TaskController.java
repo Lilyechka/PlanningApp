@@ -1,6 +1,6 @@
 package com.liliia.Controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
+
 import com.liliia.model.Task;
 import com.liliia.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,22 +10,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @PostMapping({"/create"})
-    public Task createTask( @RequestBody Task taskDetails) {
-        Task task = new Task();
-
-            task.setUser(taskDetails.getUser());
-            task.setTopic(taskDetails.getTopic());
-            task.setDeadline(taskDetails.getDeadline());
-            task.setDescriptionTask(taskDetails.getDescriptionTask());
-            return this.taskService.saveTask(task);
-
-
+    @PostMapping("/create")
+    public Task createTask(@RequestBody Task task) {
+        return taskService.saveTask(task);
     }
+
     @GetMapping("/user/{userId}")
     public List<Task> getTasksByUserId(@PathVariable Long userId) {
         return taskService.getTasksByUserId(userId);
@@ -58,5 +52,3 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 }
-
-

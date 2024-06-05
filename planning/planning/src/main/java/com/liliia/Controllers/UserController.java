@@ -1,6 +1,5 @@
 package com.liliia.Controllers;
 
-
 import com.liliia.model.User;
 import com.liliia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,27 +10,43 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
-
 
     @PostMapping("/register")
     public User registerUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
 
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Integer id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
-    @PutMapping
-    public User updateUser(@RequestBody User user) {
-        return userService.saveUser(user);
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            user.setUsername(userDetails.getUsername());
+            user.setEmail(userDetails.getEmail());
+            user.setRole(userDetails.getRole());
+            return userService.saveUser(user);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }
-
