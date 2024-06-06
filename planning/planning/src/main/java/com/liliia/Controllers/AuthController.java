@@ -54,11 +54,9 @@ public class AuthController {
         return "redirect:/login";
     }
     @PostMapping("/login")
-    public String loginUser(@RequestParam String username, @RequestParam String password) {
-        if (userService.existsByUsername(username)) {
-            return "redirect:/tasks";
-        }
-        return username;
+    public String loginUser() {
+        return "redirect:/tasks";
+
     }
 
 }
