@@ -51,4 +51,26 @@ public class AuthController {
 
         return "redirect:/login";
     }
+
+    @PostMapping("/login")
+    public String loginUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "login";
+        }
+
+        if (userService.existsByUsername(user.getUsername())) {
+            model.addAttribute("error", "Username already exists");
+            return "register";
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("USER");
+        userService.saveUser(user);
+
+        return "redirect:/login";
+    }
+
+
 }
+
+
