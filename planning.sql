@@ -34,6 +34,4 @@ INSERT INTO tasks (id_user, topic, deadline, description_task)
 -- DROP TABLE users;
 -- DROP TABLE tasks;
 
-ALTER TABLE tasks MODIFY COLUMN id_user BIGINT;
-
 
