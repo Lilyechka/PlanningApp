@@ -20,18 +20,19 @@ CREATE TABLE tasks (
 
 INSERT INTO users (username, role, password, email)
  VALUES 
-('Julia', 'ADMIN', '$2a$10$7QZjEvv5YV58z1jGxKZTZO96QGlFQUnIo1F8nJhZSv8EbU1rD8AXG', 'admin@example.com'), -- password: admin
-('Kira', 'USER', '$2a$10$7QZjEvv5YV58z1jGxKZTZO96QGlFQUnIo1F8nJhZSv8EbU1rD8AXG', 'user1@example.com'), -- password: user
-('Mira', 'USER', '$2a$10$7QZjEvv5YV58z1jGxKZTZO96QGlFQUnIo1F8nJhZSv8EbU1rD8AXG', 'user2@example.com'); -- password: user
+('Oksana', 'ADMIN', '$2a$10$Zd4QVimJZnaso/W7ruNAL.9jwEw3zER6nR4mjOkLjpCEGjm45VQNy', 'Oksana@example.com'), -- password: Oksana.123@
+('Julia', 'ADMIN', '$2a$10$BJ7wXKyyvZhfL4umXrgCKO6Iy2WJfU71Z7x8QaQ9y1pKkPuqsui1K', 'Julia@example.com'), -- password: Julia.123@
+('Kira', 'USER', '$2a$10$liUNKJucPOijptbsSBUq.Oi/iDVZONpT7JSdgKQnxCx2/QyoUuHQm', 'Kira@example.com'); -- password: Kira.123@
+
 
 
 INSERT INTO tasks (id_user, topic, deadline, description_task)
  VALUES 
-(2, 'Task for user1', '2024-06-15T12:00:00', 'Description for task1'),
-(3, 'Task for user2', '2024-06-20T12:00:00', 'Description for task2');
+(1, 'Task for Oksana', '2024-06-17T12:00:00', 'Description for Oksana`s task'),
+(2, 'Task for Julia', '2024-06-15T12:00:00', 'Description for Julia`s task'),
+(3, 'Task for Kira', '2024-06-20T12:00:00', 'Description for Kira`s task');
 
 
 -- DROP TABLE users;
 -- DROP TABLE tasks;
-
 
