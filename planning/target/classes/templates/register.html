@@ -43,14 +43,21 @@
             text-align: center;
             margin-top: 10px;
         }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
-<form th:action="@{/register}" method="post">
+<form th:action="@{/register}" th:object="${user}" method="post">
     <h2>Registration</h2>
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="email" name="email" placeholder="Email" required>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${#fields.hasErrors('username')}" class="error" th:errors="*{username}"></div>
+    <input type="text" th:field="*{username}" placeholder="Username" required>
+    <div th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"></div>
+    <input type="password" th:field="*{password}" placeholder="Password" required>
+    <div th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></div>
+    <input type="email" th:field="*{email}" placeholder="Email" required>
     <button type="submit">Register</button>
     <div class="login-link">
         <a th:href="@{/login}">Already have an account? Login here</a>
