@@ -1,6 +1,6 @@
 USE planner;
 CREATE TABLE users (
-    id_user INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id_user BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     role VARCHAR(5) NOT NULL,
     password VARCHAR(100) NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE tasks (
-    id_task INTEGER AUTO_INCREMENT PRIMARY KEY,
-    id_user INTEGER,
+    id_task BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_user BIGINT,
     topic VARCHAR(500) NOT NULL,
     date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
     deadline DATETIME,
@@ -34,5 +34,6 @@ INSERT INTO tasks (id_user, topic, deadline, description_task)
 -- DROP TABLE users;
 -- DROP TABLE tasks;
 
+ALTER TABLE tasks MODIFY COLUMN id_user BIGINT;
 
 
