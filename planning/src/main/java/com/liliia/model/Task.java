@@ -1,8 +1,9 @@
 package com.liliia.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -17,8 +18,11 @@ public class Task {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @Column(name = "topic", nullable = false, length = 500)
-    private String topic;
+    @Column(name = "topic", nullable = false)
+    private String title;
+
+    @Column(name = "description_task", length = 10000)
+    private String description;
 
     @Column(name = "date_of_creation", nullable = false, updatable = false)
     private LocalDateTime dateOfCreation;
@@ -26,13 +30,6 @@ public class Task {
     @Column(name = "deadline")
     private LocalDateTime deadline;
 
-    @Column(name = "description_task", length = 10000)
-    private String descriptionTask;
-
-    @PrePersist
-    protected void onCreate() {
-        dateOfCreation = LocalDateTime.now();
-    }
 
     public Long getId() {
         return id;
@@ -50,12 +47,20 @@ public class Task {
         this.user = user;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getDateOfCreation() {
@@ -73,15 +78,4 @@ public class Task {
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
-
-    public String getDescriptionTask() {
-        return descriptionTask;
-    }
-
-    public void setDescriptionTask(String descriptionTask) {
-        this.descriptionTask = descriptionTask;
-    }
-
-
 }
-

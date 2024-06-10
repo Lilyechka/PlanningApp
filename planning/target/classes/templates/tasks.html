@@ -63,29 +63,28 @@
 <h1>Tasks</h1>
 <div>
     <a th:href="@{/tasks/new}">Create New Task</a>
-    <a th:href="@{/tasks/user}">My Tasks</a>
-    <a th:href="@{/tasks}">All Tasks</a>
+    <a th:href="@{/tasks}">My Tasks</a>
+    <a th:href="@{/tasks/all}">All Tasks</a>
 </div>
 <table>
     <thead>
     <tr>
-        <th>ID</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Creation Date</th>
         <th>Deadline</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="task : ${tasks}">
-        <td th:text="${task.id}"></td>
         <td th:text="${task.title}"></td>
         <td th:text="${task.description}"></td>
-        <td th:text="${#dates.format(task.deadline, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${#temporals.format(task.dateOfCreation, 'yyyy-MM-dd&#39;'T'&#39;HH:mm')}"></td>
+        <td th:text="${#temporals.format(task.deadline, 'yyyy-MM-dd&#39;'T'&#39;HH:mm')}"></td>
         <td>
-            <!--<a th:href="@{|/tasks/edit/${task.id}|}">Edit</a>-->
             <form th:action="@{|/tasks/edit/${task.id}|}" method="post" style="display:inline;">
-                <button type="submit">Edit</button>
+                <a th:href="@{/tasks/new}">Edit</a>
             </form>
             <form th:action="@{|/tasks/delete/${task.id}|}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
@@ -96,4 +95,3 @@
 </table>
 </body>
 </html>
-
